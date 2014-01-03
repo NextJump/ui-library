@@ -33,7 +33,7 @@ class Nxj_UI {
     *       TODO. 
     *                 
     * }    
-    * @return void
+    * @return String
     */
     public static function sectionhead($params) {
         //Required Params
@@ -91,26 +91,65 @@ class Nxj_UI {
     *       The top margin of the lightbox in pixels. If the lightbox is tall, it may be helpful to reduce this margin so the whole lightbox fits on screen.
     *       
     * }    
-    * @return void
+    * @return String
     */
     public static function lightbox($params) {
-        //Required Params
-        $id = $params['id'];
-        $title = $params['title'];
-        $content = $params['content'];
+        $clickClose = (isset($params['clickClose'])&&$params['clickClose'] ? true : false);
+        $display = (isset($params['visible'])&&$params['visible']?'':'display:none;');
+        $callback = (isset($params['callback'])&&$params['callback'] ? $params['callback'].'();' : '');
+        $style = ''
+            .(isset($params['top'])?'margin-top:'.$params['top'].'px;':'')
+            .(isset($params['width'])?'width:'.$params['width'].'px;':'')
+            .(isset($params['height'])?'height:'.$params['height'].'px;':'');
 
-        //Optional Params
-        $showCloseButton = isset($params['showCloseButton']) ? $params['showCloseButton'] : null;
-        $clickClose = isset($params['clickClose']) ? $params['clickClose'] : null;
-        $visible = isset($params['visible']) ? $params['visible'] : null;
-        $width = isset($params['width']) ? $params['width'] : null;
-        $height = isset($params['height']) ? $params['height'] : null;
-        $top = isset($params['top']) ? $params['top'] : null;
+        $output = "
+<div class=\"nxj_lightboxHolder\"
+        style=\"".$display."\"
+        id=\"".$params['id']."\"
+        ".($clickClose ? " onclick=\"if(!Event.findElement(event,'.nxj_lightbox')){ $('".$params['id']."').hide(); $callback }\"" : "")."
+    >
+    <div class=\"nxj_lightbox\" style=\"".$style/"\">";
 
+        if(!isset($params['showCloseButton']) || $params['showCloseButton']==true){
+            $output .= "
+        <div class=\"nxj_lightboxClose\" onclick=\"$('".$params['id']."').hide(); ".$callback."\"></div>";
+        }
 
+        $output .= "
+        <div class=\"nxj_lightboxTitle\">".$params['title']."</div>
+        <div class=\"nxj_lightboxContent\">".$params['content']."</div>
+    </div>
+</div>";
 
+        return $output;
     }
 
+    public static function tabs($params) {
+    }
+
+    public static function button($params) {
+    }
+
+    public static function selectbox($params) {
+    }
+
+    public static function datepicker($params) {
+    }
+
+    public static function slider($params) {
+    }
+
+    public static function scrollbar($params) {
+    }
+
+    public static function pagination($params) {
+    }
+
+    public static function tooltip($params) {
+    }
+
+    public static function carousel($params) {
+    }
 
 }
 ?>

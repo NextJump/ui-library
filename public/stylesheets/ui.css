@@ -1,0 +1,817 @@
+/* UILibrary Styles - by Dev Poets Society */
+.nxj_sectionHead {
+    background:#DCEEFF;
+    float:left;
+    height:36px;
+    line-height:36px;
+    padding:10px 10px 5px;
+    width:940px;
+}
+.nxj_sectionHead .categoryIcon {
+    float:left;
+    height:36px;
+    margin-right:10px;
+    width:36px;
+}
+.nxj_sectionHead .categoryIcon img {
+    height:100%;
+    width:100%;
+}
+.nxj_sectionHead .categoryTitle {
+    color:#333333;
+    float:left;
+    font-family:'Roboto',Helvetica,Arial,Sans-serif;
+    font-size:17px;
+    font-weight:400;
+    line-height:35px;
+    text-align:left;
+    text-transform:uppercase;
+}
+.nxj_sectionHead .categoryActions{
+    float: right;
+    line-height: 15px;
+    padding: 10px 0;
+}
+.nxj_sectionHead .actions{
+    width: auto;
+    float: right;
+    padding: 0 0 0 10px;
+    font-family: 'OpenSans', Arial, Sans-serif;
+    font-size: 12px;
+    color: #666;
+    text-transform: capitalize;
+}
+.nxj_sectionHead a{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.nxj_sectionHead a:hover{
+    color: #666;
+}
+.nxj_sectionHead .onecartTag {
+    background: url('http://imgb.nxjimg.com/emp_image/bestbuy/banner/onecartshadow.png');
+    width: 66px;
+    height: 30px;
+    cursor: pointer;
+    float: right;
+    margin-top: -10px;
+}
+.nxj_sectionHead .tooltip_content {
+    display: none;
+    position: relative;
+    background: #333;
+    padding: 10px;
+    color: white;
+    width: 160px;
+    *width: 175px; /* IE7 and below */  
+    top: 35px;
+    left: -98px;
+    z-index: 100;
+    line-height: normal;
+    font-weight: normal;
+}
+.nxj_sectionHead .tooltip_content.autowidth {
+    width: auto;
+}
+
+.nxj_sectionHead .onecartTag:hover .tooltip_content,
+.nxj_sectionHead .certCount:hover .tooltip_content {
+    display: block;
+}
+.nxj_sectionHead .tooltip_arrow {
+    border-right: 10px solid #333333;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    height: 0;
+    width: 0;
+    margin: 0;
+    position: absolute;
+    left: -5px;
+    top: 1px;
+}
+.nxj_sectionHead .tooltip_copy {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.nxj_sectionHead .tooltip_content {
+    width:128px;
+}
+.nxj_sectionHead .tooltip_copy {
+    font-family:'OpenSans',Arial,Sans-serif;
+    text-align:left;
+    text-transform:none;
+}
+
+.nxj_sectionHead .tooltip_content.tooltip_below .tooltip_arrow {
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #333;
+    border-left: 10px solid transparent;
+    top: -17px;
+    left: 152px;
+}
+.nxj_sectionHead .tooltip_content.tooltip_below .tooltip_arrow {
+    left:121px;
+}
+.nxj_sectionHead  .tooltip_copy span {
+    font-weight: bold;
+}
+.nxj_sectionHead  .onecartTag a {
+    color: white;
+    text-decoration: none;
+}
+.nxj_sectionHead  .onecartTag a:hover {
+    color: white;
+}
+.nxj_sectionHead  .onecartGreen {
+    color: #92CD28;
+}
+
+
+.nxj_lightboxHolder {
+    background:url('//imga.nxjimg.com/emp_image/userprofile/bg.png') repeat;
+    height:100%;
+    left:0;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:1000;
+}
+.nxj_lightbox {
+    background:#FFFFFF;
+    box-shadow:0 0 10px #222222;
+    margin:200px auto 0;
+    min-width:400px;
+    position:relative;
+    width:400px;
+}
+.nxj_lightboxClose {
+    background:url('//imgb.corporateperks.com/emp_image/home/close.png') no-repeat;
+    cursor:pointer;
+    height:22px;
+    position:absolute;
+    right:10px;
+    top:10px;
+    width:22px; 
+}
+.nxj_lightboxClose:hover {
+    background-position:0 -22px;
+}
+.nxj_lightboxTitle {
+    color:#2AA1E5;
+    font-family:'Roboto',Helvetica,Arial,sans-serif;
+    font-size:18px;
+    line-height:42px;
+    padding:0 10px;
+    text-align:left;
+    text-transform:uppercase;
+}
+.nxj_lightboxContent {
+    font-family:'OpenSans',Helvetica,Arial,sans-serif;
+    padding:3px 10px 10px;
+    text-align:left;
+}
+
+
+a.nxj_button {
+    background-position:center 0;
+    cursor:pointer;
+    display:block;
+    height:32px;
+    width:124px;
+}
+a.nxj_button.nxj_cssButton {
+    background:linear-gradient(to bottom, #64AEF6 0%, #206BDF 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#64AEF6', endColorstr='#206BDF');
+    border:1px solid #1F54BC;
+    border-radius:5px;
+    color:#EFF7FF;
+    font-family:'OpenSansBold',Helvetica,Arial,sans-serif;
+    font-size:12px;
+    height:14px;
+    margin:0 auto;
+    padding:8px 13px;
+    text-align:center;
+    text-decoration:none;
+    text-shadow:0 -1px #666666;
+    text-transform:uppercase;
+}
+a.nxj_button.nxj_cssButton.green {
+    background:linear-gradient(to bottom, #A0E342 0%, #72B304 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#A0E342', endColorstr='#72B304');
+    border:1px solid #5B9400;
+}
+a.nxj_button.nxj_cssButton.orange {
+    background:linear-gradient(to bottom, #FFBE61 0%, #EB8E2D 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#FFBE61', endColorstr='#EB8E2D');
+    border:1px solid #F15A25;
+}
+a.nxj_button:hover {
+    background-position:center -32px;
+}
+a.nxj_button.nxj_cssButton:hover {
+    background-position:center 0;
+    _background:linear-gradient(to bottom, #8CBDED 0%, #2D78E0 89%, #74A5ED 100%);
+    box-shadow:inset 0px 0px 3px 3px rgba(255,255,255,0.3);
+}
+a.nxj_button.disabled,
+a.nxj_button.disabled:hover {
+    background-position:center -64px;
+    cursor:default;
+}
+a.nxj_button.nxj_cssButton.disabled,
+a.nxj_button.nxj_cssButtondisabled:hover {
+    background:linear-gradient(to bottom, #C3C3C3 0%, #A7A7A7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#C3C3C3', endColorstr='#A7A7A7');
+    background-position:0 0;
+    border:1px solid #A6A6A6;
+    box-shadow:none;
+    color:#E3E3E3;
+    cursor:default;
+}
+
+
+.nxj_input {
+    border:1px solid #999999;
+    box-shadow:inset 0 0 4px 0px #888888;
+    color:#333333;
+    font-family:'OpenSans',Helvetica,Arial,sans-serif;
+    font-size:14px;
+    height:22px;
+    line-height:22px;
+    outline:none;
+    padding:4px
+}
+.nxj_input.empty {
+    color:#999999;
+}
+.nxj_input:focus {
+    border-color:#3B76AD;
+    box-shadow:none;
+}
+.nxj_input.green,
+.nxj_input.green:focus {
+    border-color:#86C38C;
+    box-shadow:inset 0 0 4px 1px #B8FFB1;
+}
+.nxj_input.yellow,
+.nxj_input.yellow:focus {
+    border-color:#D6C38C;
+    box-shadow:inset 0 0 4px 1px #F6EA9E;
+}
+.nxj_input.red,
+.nxj_input.red:focus {
+    border-color:#CE7272;
+    box-shadow:inset 0 0 4px 1px #FFB0B0;
+}
+
+
+.nxj_select {
+    background:#FFFFFF;
+    border:1px solid #999999;
+    box-shadow:inset 0 0 4px 0px #888888;
+    color:#333333;
+    cursor:pointer;
+    font-size:14px;
+    min-height:20px;
+    outline:0 none;
+    overflow:visible;
+    padding:4px;
+    position:relative;
+}
+.nxj_selectOpen,
+.nxj_select.nxj_selectOpen {
+    background:#F8F8F8;
+    box-shadow:none;
+}
+.nxj_selectDisplay {
+    line-height:22px;
+    min-height:22px;
+    width:100%;
+}
+.nxj_selectDisplay.default {
+    color:#999999;
+}
+.nxj_selectArrow {
+    border-color:#999999 transparent transparent;
+    border-style:solid;
+    border-width:7px 5px 0;
+    display:block;
+    font-size:0;
+    height:0;
+    margin-top:-3px;
+    position:absolute;
+    right:6px;
+    top:50%;
+    width:0;
+}
+.nxj_selectInner {
+    -moz-border-bottom-colors:none;
+    -moz-border-left-colors:none;
+    -moz-border-right-colors:none;
+    -moz-border-top-colors:none;
+    background:none repeat scroll 0 0 #FFFFFF;
+    border-color:-moz-use-text-color #AAAAAA #AAAAAA;
+    border-image:none;
+    border-right:1px solid #AAAAAA;
+    border-style:none solid solid;
+    border-width:medium 1px 1px;
+    display:none;
+    left:-1px;
+    margin-top:1px;
+    position:absolute;
+    top:100%;
+    width:100%;
+}
+.nxj_selectOpen .nxj_selectInner {
+    display:block;
+}
+.nxj_selectOption {
+    cursor:pointer;
+    display:block;
+    padding:3px 5px;
+}
+.nxj_selectOption:hover {
+    background:#2AA1E5;
+}
+
+/* Date Picker Mk. II */
+.nxj_datePicker {
+    height:32px;
+    position:relative;
+    width:120px;
+    z-index:0;
+}
+.nxj_datePicker .nxj_input {
+    float:left;
+    width:110px;
+}
+.nxj_datePicker .nxj_input:focus {
+    background:#A5D2FD;
+    color:#000000;
+}
+.nxj_datePicker .calendar_icon {
+    background:url('//imga.nxjimg.com/emp_image/travel/icon_calendar_dark.png') no-repeat right center;
+    cursor:pointer;
+    height:100%;
+    position:absolute;
+    right:4px;
+    top:0;
+    width:20px;
+    z-index:1;
+}
+.nxj_datePicker .nxj_calendar {
+    background:#F6F6F6;
+    border:1px solid #CCCCCC;
+    -webkit-box-shadow:0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.2);
+    display:none;
+    float:left;
+    font-family:'OpenSans',Arial,Sans-serif;
+    padding:10px;
+    position:absolute;
+    width:644px;
+    z-index:100;
+}
+.nxj_datePicker .nxj_calendar.monthCount_1 {
+    width:208px;
+}
+.nxj_datePicker .nxj_calendar.monthCount_2 {
+    width:426px;
+}
+.nxj_datePicker.open .nxj_calendar {
+    display:block;
+}
+.nxj_datePicker .nxj_calendarHeader {
+    font-size:16px;
+    font-weight:bold;
+    margin:-5px 0 5px;
+}
+.nxj_datePicker .nxj_month {
+    background-color:#FFFFFF;
+    border:1px solid #CCCCCC;
+    float:left;
+    margin-right:10px;
+    width:206px;
+}
+.nxj_datePicker .nxj_month.last {
+    margin-right:0;
+}
+.nxj_datePicker .nxj_monthHeader {
+    border-bottom:1px dotted #BBBBBB;
+    float:left;
+    line-height:21px;
+    position:relative;
+    width:100%;
+}
+.nxj_datePicker .nxj_monthBody {
+    float:left;
+    padding:0 1px;
+    width:204px;
+}
+.nxj_datePicker .monthScroll {
+    cursor:pointer;
+    font-size:16px;
+    position:absolute;
+    text-align:center;
+    top:0;
+    width:22px;
+}
+.nxj_datePicker .monthScroll.left { left:0; }
+.nxj_datePicker .monthScroll.right { right:0; }
+.nxj_datePicker .monthScroll:hover {
+    background:#666666;
+    color:#FFFFFF;
+}
+.nxj_datePicker .monthName {
+    color:#333333;
+    float:left;
+    font-size:14px;
+    font-weight:bold;
+    text-align:center;
+    text-transform:uppercase;
+    width:100%;
+}
+.nxj_datePicker .nxj_dayNames {
+    color:#333333;
+    float:left;
+    line-height:28px;
+    padding:0 1px;
+    width:204px;
+}
+.nxj_datePicker .dayName,
+.nxj_datePicker .dayValue {
+    border:1px solid transparent;
+    float:left;
+    text-align:center;
+    width:27px;
+}
+.nxj_datePicker .dayValue {
+    cursor:pointer;
+}
+.nxj_datePicker .dayValue.past,
+.nxj_datePicker .dayValue.empty {
+    color:#CCCCCC;
+    cursor:default;
+}
+.nxj_datePicker .dayValue.today {
+    border-color:#F15E22;
+}
+.nxj_datePicker .dayValue.selected {
+    background-color:#1758CE;
+    color:#FFFFFF;
+}
+.nxj_datePicker .dayValue.spanned {
+    background-color:#A5D2FD;
+    color:#FFFFFF;
+}
+.nxj_datePicker .dayValue:hover {
+    text-decoration:underline;
+}
+.nxj_datePicker .dayValue.past:hover,
+.nxj_datePicker .dayValue.empty:hover {
+    text-decoration:none;
+}
+
+/* Slider Styles */
+.nxj_slider {
+    padding:9px;
+    position:relative;
+}
+.nxj_slider .nxj_sliderBar {
+    background:#E0E0E0;
+    border:1px solid #B4B5BA;
+    border-radius:4px;
+    -webkit-box-shadow:0 0 2px 0px #B4B5BA inset;
+    box-shadow:0 0 2px 0px #B4B5BA inset;
+    float:left;
+    height:10px;
+    padding:0 4px;
+}
+.nxj_slider .nxj_sliderHandle {
+    background:url('//imga.nxjimg.com/emp_image/home/slider_nub.png') no-repeat center center;
+    cursor:pointer;
+    height:30px;
+    position:absolute;
+    top:0;
+    width:30px;
+}
+.nxj_slider.disabled .nxj_sliderHandle {
+    cursor:default;
+}
+.nxj_slider .nxj_sliderSegment {
+    background:#A5D2FD;
+    border-color:#4895DD;
+    border-radius:4px;
+    -webkit-box-shadow:0 0 2px 0px #4895DD inset;
+    box-shadow:0 0 2px 0px #4895DD inset;
+    float:left;
+    height:10px;
+    margin-left:13px;
+    position:absolute;
+    top:10px;
+}
+.nxj_slider.disabled .nxj_sliderSegment {
+    display:none;
+}
+.nxj_slider.single .nxj_sliderSegment {
+    margin-left:9px;
+    padding-left:4px;
+}
+.nxj_slider .nxj_sliderMarker {
+    position:absolute;
+    top:30px;
+}
+.nxj_slider.marker_dot .nxj_sliderMarker {
+    background:#E0E0E0;
+    border:1px solid #B4B5BA;
+    border-radius:3px;
+    -webkit-box-shadow:0 0 2px 0px #B4B5BA inset;
+    box-shadow:0 0 2px 0px #B4B5BA inset;
+    height:6px;
+    margin-left:10px;
+    width:6px;
+}
+.nxj_slider.marker_number .nxj_sliderMarker {
+    font-size:12px;
+    height:12px;
+    line-height:12px;
+    margin-left:2px;
+    text-align:center;
+    width:25px;
+}
+
+/* Pagination styles */
+.nxj_uiPagination {
+	float:right;
+	padding:5px;
+}
+
+ul.nxj_uiPage {
+    list-style: none;
+    margin: 3% 5%;
+    overflow: auto;
+    padding: 0;
+    margin: 0;
+    /* Prevent selection */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+ul.nxj_uiPage li {
+    border: 1px solid #1D6ECE;
+    background-color: white;
+    color: #1D6ECE;
+    float: left;
+    padding: 5px 7px;
+}
+
+ul.nxj_uiPage li:hover {
+    background-color: #A2C2EE;
+    cursor: pointer;
+    color: #1D6ECE;
+}
+
+ul.nxj_uiPage li.active{
+    border: 1px solid white;
+    font-weight: bold;
+    color: #666;
+}
+
+ul.nxj_uiPage li.hidden {
+	display:none;
+}
+
+ul.nxj_uiPage * {
+    margin: 0 1px;
+}
+
+ul.nxj_uiPage div {
+    float: left;
+}
+
+ul.nxj_uiPage li.disabled {
+    background-color: #ddd;
+    color: #1D6ECE;
+}
+
+ul.nxj_uiPage li a {
+	text-decoration: none;
+}
+ul.nxj_uiPage li a:hover {
+	text-decoration: none;
+    color: #1D6ECE;
+}
+
+/* Tab styles */
+.nxj_tabs {
+    height: 45px;
+    overflow: hidden;
+}
+.nxj_tabs .tab {
+    line-height: 45px;
+}
+.nxj_tabs .tabHolder {
+    border-bottom: 1px solid #DDD;
+}
+.nxj_tabs .tab {
+    float: left;
+    padding: 0 25px;
+    height: 42px;
+    color: #666;
+    cursor: pointer;
+    background: #F5F5F5;
+    border-right: 1px solid #DDD;
+    border-top: 1px solid #DDD;
+    position: relative;
+    top: 1px;
+    font-family: 'Roboto', Arial, Sans-serif;
+    text-align: center;
+    font-size: 14px;
+}
+.nxj_tabs .tab.large {
+    width:160px;
+}
+.nxj_tabs .tab:first-child {
+    border-left: 1px solid #e2e2e2;
+}
+.nxj_tabs .tab:after {
+    content: '';
+    box-shadow: 0px 3px 10px 0px #333;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #DDD;
+    display: block;
+}
+.nxj_tabs .tab:hover:after {
+    box-shadow: none;
+}
+.nxj_tabs .tab.selected {
+    background: #FFFFFF;
+    height: 43px;
+}
+.nxj_tabs .tab.selected:after {
+    height: 0;
+}
+.nxj_tabBlock {
+    position:absolute;
+}
+.nxj_tabBlock.hide {
+    display: none;
+}
+
+/* Tool tips */
+.nxj_tipUp,
+.nxj_tipDown,
+.nxj_tipLeft,
+.nxj_tipRight {
+    background:#333333;
+    cursor:default;
+    cursor:help;
+    display:none;
+    height:0;
+    left:50%;
+    overflow:visible;
+    position:absolute;
+    top:50%;
+    width:0;
+}
+*:hover > .nxj_tipUp,
+*:hover > .nxj_tipDown,
+*:hover > .nxj_tipLeft,
+*:hover > .nxj_tipRight {
+    display:block;
+}
+.nxj_tipArrow {
+    border:6px solid transparent;
+    font-size:0;
+    height:0;
+    margin:0;
+    position:absolute;
+    width:0;
+}
+.nxj_tipUp .nxj_tipArrow {
+    border-top:8px solid #333333;
+    left:-6px;
+    top:-10px;
+}
+.nxj_tipDown .nxj_tipArrow {
+    border-bottom:8px solid #333333;
+    left:-6px;
+    top:-4px;
+}
+.nxj_tipLeft .nxj_tipArrow {
+    border-left:8px solid #333333;
+    left:-8px;
+    top:-6px;
+}
+.nxj_tipRight .nxj_tipArrow {
+    border-right:8px solid #333333;
+    left:-6px;
+    top:-6px;
+}
+.nxj_tipContent {
+    background:#333333;
+    color:#FFFFFF;
+    float:left;
+    font-family:'Roboto',Helvetica,Arial,sans-serif;
+    font-size:11px;
+    line-height:13px;
+    padding:10px 20px;
+    position:absolute;
+    width:140px;
+}
+.nxj_tipContent.oneLine {
+    height:13px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.nxj_tipUp .nxj_tipContent {
+    bottom:10px;
+    left:-90px;
+}
+.nxj_tipDown .nxj_tipContent {
+    left:-90px;
+    top:10px;
+}
+.nxj_tipLeft .nxj_tipContent {
+    right:8px;
+    top:-17px;
+}
+.nxj_tipRight .nxj_tipContent {
+    left:8px;
+    top:-17px;
+}
+
+/* Carousels */
+.nxj_carousel {
+    background:#F4F4F4;
+    border:1px solid #999999;
+}
+.nxj_carouselInner {
+    overflow:hidden;
+    position:relative;
+}
+.nxj_carouselPanel {
+    background:#FFFFFF;
+    height:100%;
+    position:absolute;
+    width:100%;
+}
+.nxj_carouselControls {
+    height:40px;
+}
+.nxj_carouselControlsInner {
+    background:#FFFFFF;
+    border:1px solid #DDDDDD;
+    border-radius:14px 14px 14px 14px;
+    float:left;
+    margin-top:9px;
+    padding:1px;
+}
+.nxj_carouselControlsLeft {
+    background:url('//imga.nxjimg.com/emp_image/marketplace/slider/left_off.png') no-repeat;
+    cursor:pointer;
+    float:left;
+    height:15px;
+    margin-right:2px;
+    opacity:0.7;
+    width:15px;
+}
+.nxj_carouselControlsRight {
+    background:url('//imga.nxjimg.com/emp_image/marketplace/slider/right_off.png') no-repeat;
+    cursor:pointer;
+    float:left;
+    height:15px;
+    margin-right:2px;
+    opacity:0.7;
+    width:15px;
+}
+.nxj_carouselControlsDot {
+    background:url('//imga.nxjimg.com/emp_image/marketplace/slider/dot_off.png') no-repeat -1px -1px;
+    cursor:pointer;
+    float:left;
+    height:15px;
+    margin:1px 1px 0 0;
+    opacity:0.7;
+    width:15px;
+}
+.nxj_carouselControlsDot.on {
+    background-image:url('//imga.nxjimg.com/emp_image/marketplace/slider/dot_on.png');
+    opacity:1;
+}
+.nxj_carouselControlsLeft:hover,
+.nxj_carouselControlsRight:hover,
+.nxj_carouselControlsDot:hover {
+    opacity:1;
+}
+/*---------- End UILibrary Styles ---------*/
