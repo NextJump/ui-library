@@ -5,6 +5,23 @@ class Nxj_UI {
 
     }
 
+	public function anythingToTime($input=null){
+		if(!$input){
+			return time();
+		}else if(is_array($input)){
+			$output = array();
+
+			foreach($input as $item){
+				$output[] = self::anythingToTime($item);
+			}
+
+			return $output;
+		}else if(preg_match('/^[0-9]*$/', "$input")){
+			return $input;
+		}else if(is_string($input)){
+			return strtotime($input);
+		}
+	}
 
     /**
     * @param array $params {
@@ -108,7 +125,7 @@ class Nxj_UI {
         id=\"".$params['id']."\"
         ".($clickClose ? " onclick=\"if(!Event.findElement(event,'.nxj_lightbox')){ $('".$params['id']."').hide(); $callback }\"" : "")."
     >
-    <div class=\"nxj_lightbox\" style=\"".$style/"\">";
+    <div class=\"nxj_lightbox\" style=\"".$style."\">";
 
         if(!isset($params['showCloseButton']) || $params['showCloseButton']==true){
             $output .= "
@@ -171,7 +188,7 @@ activateTabSet('".$params['id']."');
         if(isset($params['callback'])){
             $output .= "if(!$(this).hasClassName('disabled')) return ".$params['callback']."() !== false;\"";
         }else{
-            $output .= "return !$(this).hasClassName('disabled');\""
+            $output .= "return !$(this).hasClassName('disabled');\"";
         }
 
         $output .= "
@@ -216,9 +233,9 @@ activateTabSet('".$params['id']."');
 
     public static function datepicker($params) {
         $type = isset($params['type']) ? $params['type'] : 'single';
-        $date_start = DateFactory::anythingToTime($type=='range' ? $params['date_start'] : (isset($params['date']) ? $params['date'] : null));
-        $date_end = isset($params['date_end']) ? DateFactory::anythingToTime($params['date_end']) : null;
-        $firstShown = strtotime(date('Y-m-d', DateFactory::anythingToTime(isset($params['firstShown'])?$params['firstShown']:$date_start)));
+        $date_start = Nxj_UI::anythingToTime($type=='range' ? $params['date_start'] : (isset($params['date']) ? $params['date'] : null));
+        $date_end = isset($params['date_end']) ? Nxj_UI::anythingToTime($params['date_end']) : null;
+        $firstShown = strtotime(date('Y-m-d', Nxj_UI::anythingToTime(isset($params['firstShown'])?$params['firstShown']:$date_start)));
         $name = isset($params['name']) ? $params['name'] : null;
         $id = isset($params['id']) ? $params['id'] : null;
         $monthCount = isset($params['monthCount']) ? $params['monthCount'] : 1;
@@ -638,9 +655,9 @@ if($params['callreset']){
         data-animationdir=\"".(isset($params['animationDir']) ? $params['animationDir'] : 'E')."\"
         data-animationreversedir=\"".(isset($params['animationReverseDir']) ? $params['animationReverseDir'] : (isset($params['animationDir']) ? $params['animationDir'] : 'W'))."\"
         data-animationduration=\"".(isset($params['animationDuration']) ? $params['animationDuration'] : '0.9')."\"
-        data-animationindex="0"
+        data-animationindex=\"0\"
         data-transition=\"".(isset($params['transition']) ? $params['transition'] : 'sinoidal')."\"
-        data-currentindex="0"
+        data-currentindex=\"0\"
         data-numpanels=\"".count($panels)."\"
         data-autoscroll=\"".(isset($params['autoScroll'])&&!$params['autoScroll'] ? 'no' : 'yes')."\"
     >

@@ -1,4 +1,36 @@
 /* UILibrary Styles - by Dev Poets Society */
+@font-face{
+	font-family:'OpenSans';
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	src:url('OpenSans/OpenSans-Regular-webfont.eot');
+	src:url('OpenSans/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+		url('OpenSans/OpenSans-Regular-webfont.woff') format('woff'),
+		url('OpenSans/OpenSans-Regular-webfont.ttf') format('truetype'),
+		url('OpenSans/OpenSans-Regular-webfont.svg#webfont') format('svg');
+}
+@font-face{
+	font-family:'Roboto';
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	src:url('Roboto/Roboto-Regular-webfont.eot');
+	src:url('Roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+		url('Roboto/Roboto-Regular-webfont.woff') format('woff'),
+		url('Roboto/Roboto-Regular-webfont.ttf') format('truetype'),
+		url('Roboto/Roboto-Regular-webfont.svg#webfont') format('svg');
+}
+.clear {
+	clear:both;
+}
+.floatLeft {
+	float:left;
+}
+.floatRight {
+	float:right;
+}
+
 .nxj_sectionHead {
     background:#DCEEFF;
     float:left;
@@ -27,25 +59,25 @@
     text-align:left;
     text-transform:uppercase;
 }
-.nxj_sectionHead .categoryActions{
-    float: right;
-    line-height: 15px;
-    padding: 10px 0;
+.nxj_sectionHead .categoryActions {
+    float:right;
+    line-height:15px;
+    padding:10px 0;
 }
-.nxj_sectionHead .actions{
-    width: auto;
-    float: right;
-    padding: 0 0 0 10px;
-    font-family: 'OpenSans', Arial, Sans-serif;
-    font-size: 12px;
-    color: #666;
-    text-transform: capitalize;
+.nxj_sectionHead .actions {
+    width:auto;
+    float:right;
+    padding:0 0 0 10px;
+    font-family:'OpenSans',Arial,Sans-serif;
+    font-size:12px;
+    color:#666;
+    text-transform:capitalize;
 }
-.nxj_sectionHead a{
-    text-decoration: underline;
-    cursor: pointer;
+.nxj_sectionHead a {
+    text-decoration:underline;
+    cursor:pointer;
 }
-.nxj_sectionHead a:hover{
+.nxj_sectionHead a:hover {
     color: #666;
 }
 .nxj_sectionHead .onecartTag {
