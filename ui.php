@@ -166,10 +166,7 @@ class Nxj_UI {
 
         $output .= "
     </div>
-</div>
-<script>
-activateTabSet('".$params['id']."');
-</script>";
+</div>";
         return $output;
     }
 
@@ -405,7 +402,7 @@ activateTabSet('".$params['id']."');
 
         if($type=='range'){
             $output .= "
-    <input classa=\"nxj_sliderInput_left\" ".($id?'id="'.$id.'_value_left"':'')." type=\"hidden\" ".($name?'name="'.$name.'_left"':'')." value=\"$value1\" />
+    <input class=\"nxj_sliderInput_left\" ".($id?'id="'.$id.'_value_left"':'')." type=\"hidden\" ".($name?'name="'.$name.'_left"':'')." value=\"$value1\" />
     <input class=\"nxj_sliderInput_right\" ".($id?'id="'.$id.'_value_right"':'')." type=\"hidden\" ".($name?'name="'.$name.'_right"':'')." value=\"$value2\" />";
         }else{
             $output .= "
