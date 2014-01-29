@@ -150,7 +150,7 @@ class Nxj_UI {
     <div class=\"tabHolder\">";
         foreach($params['tabs'] as $tab){
             $output .= "
-        <div class=\"tab".(!empty($tab->selected) ? ' selected' : '').(($params['fixed']) ? ' large' : '')." data-target=\"".$params['id'].'_'.$tab->label.">
+        <div class=\"tab".(!empty($tab->selected) ? ' selected' : '').(($params['fixed']) ? ' large' : '')."\" data-target=\"".$params['id'].'_'.$tab->label."\">
             ".$tab->label."
         </div>";
         }
@@ -244,9 +244,9 @@ class Nxj_UI {
         $zindex = isset($params['zindex'])?$params['zindex']:null;
 
         $output = "
-<div class=\"nxj_datePicker".(isset($params['float']) ? ' float'.ucfirst($params['float']) : '')."
+<div class=\"nxj_datePicker".(isset($params['float']) ? ' float'.ucfirst($params['float']) : '')."\"
         ".($id?'id="'.$id.'"':'')."
-        style=\"".($width?'width:'.$width.'px;':'').($zindex!==null?'z-index:'.$zindex.';':'')."
+        style=\"".($width?'width:'.$width.'px;':'').($zindex!==null?'z-index:'.$zindex.';':'')."\"
         data-type=\"$type\"
         data-monthcount=\"$monthCount\"
         data-firstshown=\"$firstShown\"
@@ -424,7 +424,8 @@ class Nxj_UI {
 
         if($marker){
             $index = 0;
-            for($i=$min; $i<=$max; $i=min($i+$increment, $max)){
+			$markerJump = max($increment, 5/$scale);
+            for($i=$min; $i<=$max; $i=min($i+$markerJump, $max)){
                 if($mode=='discrete' || $i==$min || $i==$max){
                     $output .= "
     <div class=\"nxj_sliderMarker\" data-index=\".($index++).\" style=\"left:".floor(($i-$min)*$scale)."px;\">
@@ -442,6 +443,7 @@ class Nxj_UI {
     }
 
     public static function scrollbar($params) {
+echo "Pretty scrollbars are not fully implemented :(";
 /* TODO
 <style type="text/css">
 #<?= $params['id']?> {
@@ -568,6 +570,7 @@ nxj.scrollBar =  {
     }
 
     public static function pagination($params) {
+echo "Pagination is not fully implemented :(";
 /*
 <?
 $showAll = 0;
@@ -652,7 +655,7 @@ if($params['callreset']){
         data-animationdir=\"".(isset($params['animationDir']) ? $params['animationDir'] : 'E')."\"
         data-animationreversedir=\"".(isset($params['animationReverseDir']) ? $params['animationReverseDir'] : (isset($params['animationDir']) ? $params['animationDir'] : 'W'))."\"
         data-animationduration=\"".(isset($params['animationDuration']) ? $params['animationDuration'] : '0.9')."\"
-        data-animationindex=\"0\"
+        data-animationindex=\"1\"
         data-transition=\"".(isset($params['transition']) ? $params['transition'] : 'sinoidal')."\"
         data-currentindex=\"0\"
         data-numpanels=\"".count($panels)."\"
@@ -727,7 +730,7 @@ if(!nxj_carouselMove) var nxj_carouselMove = function(car, index){
     var animationDirs = car.getAttribute('data-animationdir').split(',');
     var animationReverseDir = car.getAttribute('data-animationreversedir');
     var animationDuration = parseFloat(car.getAttribute('data-animationduration'));
-    var animationIndex = parseInt(car.getAttribute('data-animationindex'));
+    var animationIndex = parseInt(car.getAttribute('data-animationindex'))%animationDirs.length;
     var transition = car.getAttribute('data-transition');
     var currentIndex = parseInt(car.getAttribute('data-currentindex'));
     var numPanels = parseInt(car.getAttribute('data-numpanels'));
@@ -735,7 +738,7 @@ if(!nxj_carouselMove) var nxj_carouselMove = function(car, index){
     // Find out whether we're going forward or backward
     if(currentIndex == index) return document[car.id + '_lock']=false;
     var reverse = (currentIndex>index ? !((index==0)&&(currentIndex+1==numPanels)) : ((index+1==numPanels)&&(currentIndex==0)));
-    if(reverse) animationIndex = (animationIndex+animationDirs.length-1)%animationDirs.length
+    if(reverse) animationIndex = (animationIndex+animationDirs.length-1)%animationDirs.length;
     var animationDir = animationDirs[animationIndex];
 
     // Get the entering and leaving panels
