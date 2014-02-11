@@ -1,27 +1,27 @@
-<?
+<?php
 class Nxj_UI {
 
     public function __construct() {
 
     }
 
-	public function anythingToTime($input=null){
-		if(!$input){
-			return time();
-		}else if(is_array($input)){
-			$output = array();
+    public function anythingToTime($input=null){
+            if(!$input){
+                    return time();
+            }else if(is_array($input)){
+                    $output = array();
 
-			foreach($input as $item){
-				$output[] = self::anythingToTime($item);
-			}
+                    foreach($input as $item){
+                            $output[] = self::anythingToTime($item);
+                    }
 
-			return $output;
-		}else if(preg_match('/^[0-9]*$/', "$input")){
-			return $input;
-		}else if(is_string($input)){
-			return strtotime($input);
-		}
-	}
+                    return $output;
+            }else if(preg_match('/^[0-9]*$/', "$input")){
+                    return $input;
+            }else if(is_string($input)){
+                    return strtotime($input);
+            }
+    }
 
     /**
     * @param array $params {
@@ -446,14 +446,14 @@ class Nxj_UI {
 echo "Pretty scrollbars are not fully implemented :(";
 /* TODO
 <style type="text/css">
-#<?= $params['id']?> {
+#<?php= $params['id']?> {
     position: relative;
-    height: <?= $params['height']?>;
+    height: <?php= $params['height']?>;
     overflow: hidden;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-#<?= $params['id']?> .<?= $params['innerClass']?> {
+#<?php= $params['id']?> .<?php= $params['innerClass']?> {
     width: 96%;
 }
 #scrollBar {
@@ -481,13 +481,13 @@ echo "Pretty scrollbars are not fully implemented :(";
 }
 </style>
 
-<div id="scrollBar" class="scrollBar" style="<?= Util::select($this, 'visible', true) ? '' : 'display:none'?>" data-callback="<?= $params['callback']?>">
+<div id="scrollBar" class="scrollBar" style="<?php= Util::select($this, 'visible', true) ? '' : 'display:none'?>" data-callback="<?php= $params['callback']?>">
     <div class="scrollHandle" style="top:0"></div>
 </div>
 
 <script style="text/javascript">
 var nxj = window.nxj || {};
-var inner = <?= json_encode($params['innerClass'])?>;
+var inner = <?php= json_encode($params['innerClass'])?>;
 nxj.scrollBar =  {
     bar: '',
     outer: '',
@@ -572,7 +572,7 @@ nxj.scrollBar =  {
     public static function pagination($params) {
 echo "Pagination is not fully implemented :(";
 /*
-<?
+<?php
 $showAll = 0;
 $callreset = 0;
 if($params['showAll']){
@@ -585,24 +585,24 @@ if($params['callreset']){
 
 <div class="nxj_uiPagination">
     <ul class="nxj_uiPage">
-        <li id="p_prev" <?if($params['current'] == 1){?>class="disabled"<?}else{?>onclick="<?=$params['callback']?>(-1);<?if($callreset==true){?>resetPaginate(-1,<?=$params['total']?>,<?=$showAll?>,'<?=$params['callback']?>',<?=$callreset?>);"<?} }?>>
+        <li id="p_prev" <?phpif($params['current'] == 1){?>class="disabled"<?php}else{?>onclick="<?php=$params['callback']?>(-1);<?phpif($callreset==true){?>resetPaginate(-1,<?php=$params['total']?>,<?php=$showAll?>,'<?php=$params['callback']?>',<?php=$callreset?>);"<?php} }?>>
             &lt;&lt; Prev
         </li>
-        <li id="p_1" <?if($params['current'] == 1){?>class="active"<?}?> onclick="<?=$params['callback']?>(1);<?if($callreset==true){?>resetPaginate(1,<?=$params['total']?>,<?=$showAll?>,'<?=$params['callback']?>',<?=$callreset?>);<?}?>"> 1 </li>
+        <li id="p_1" <?phpif($params['current'] == 1){?>class="active"<?php}?> onclick="<?php=$params['callback']?>(1);<?phpif($callreset==true){?>resetPaginate(1,<?php=$params['total']?>,<?php=$showAll?>,'<?php=$params['callback']?>',<?php=$callreset?>);<?php}?>"> 1 </li>
         <li id="p_prel" class="hidden">...</li>
-        <?for($i=2;$i < $params['total'];$i++){?>
-            <li id="p_<?=$i?>" <?if($i == $params['current']){?>class="active"<?}?> onclick="<?=$params['callback']?>(<?=$i?>);<?if($callreset==true){?>resetPaginate(<?=$i?>,<?=$params['total']?>,<?=$showAll?>,'<?=$params['callback']?>',<?=$callreset?>);<?}?>">
-                <?=$i?>
+        <?phpfor($i=2;$i < $params['total'];$i++){?>
+            <li id="p_<?php=$i?>" <?phpif($i == $params['current']){?>class="active"<?php}?> onclick="<?php=$params['callback']?>(<?php=$i?>);<?phpif($callreset==true){?>resetPaginate(<?php=$i?>,<?php=$params['total']?>,<?php=$showAll?>,'<?php=$params['callback']?>',<?php=$callreset?>);<?php}?>">
+                <?php=$i?>
             </li>
-        <?}?>
+        <?php}?>
         <li id="p_nxel" class="hidden">...</li>
-        <li id="p_<?=$params['total']?>" <?if($params['current'] == $params['total']){?>class="active"<?}?> onclick="<?=$params['callback']?>(<?=$params['total']?>);<?if($callreset==true){?>resetPaginate(<?=$params['total']?>,<?=$params['total']?>,<?=$showAll?>,'<?=$params['callback']?>',<?=$callreset?>);<?}?>"> <?=$params['total']?> </li>
-        <li id="p_next" <?if($params['current'] == $params['total']){?>class="disabled"<?}else{?>onclick="<?=$params['callback']?>(-2);<?if($callreset){?>resetPaginate(-2,<?=$params['total']?>,<?=$showAll?>,'<?=$params['callback']?>',<?=$callreset?>);"<?} }?>>
+        <li id="p_<?php=$params['total']?>" <?phpif($params['current'] == $params['total']){?>class="active"<?php}?> onclick="<?php=$params['callback']?>(<?php=$params['total']?>);<?phpif($callreset==true){?>resetPaginate(<?php=$params['total']?>,<?php=$params['total']?>,<?php=$showAll?>,'<?php=$params['callback']?>',<?php=$callreset?>);<?php}?>"> <?php=$params['total']?> </li>
+        <li id="p_next" <?phpif($params['current'] == $params['total']){?>class="disabled"<?php}else{?>onclick="<?php=$params['callback']?>(-2);<?phpif($callreset){?>resetPaginate(-2,<?php=$params['total']?>,<?php=$showAll?>,'<?php=$params['callback']?>',<?php=$callreset?>);"<?php} }?>>
             Next &gt;&gt;
         </li>
-        <?if($showAll){?>
-            <li id="p_all" onclick="<?=$params['callback']?>(0);<?if($callreset==true){?>resetPaginate(0,<?=$params['total']?>,<?=$showAll?>,'<?=$params['callback']?>',<?=$callreset?>);<?}?>">View All</li>
-        <?}?>
+        <?phpif($showAll){?>
+            <li id="p_all" onclick="<?php=$params['callback']?>(0);<?phpif($callreset==true){?>resetPaginate(0,<?php=$params['total']?>,<?php=$showAll?>,'<?php=$params['callback']?>',<?php=$callreset?>);<?php}?>">View All</li>
+        <?php}?>
     </ul>
 </div>
 */
