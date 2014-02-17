@@ -1,4 +1,4 @@
-//TODO: Make js independant of Prototype.js 
+//TODO: Make js independant of Prototype.js
 
 nxj = window.nxj || {};
 
@@ -260,26 +260,26 @@ nxj.ui.datePicker = (function() {
       });
       return false;
     }
- 
+
     displays.each(function(oneDisplay){
       oneDisplay.removeClassName('red');
     });
- 
+
     displays[0].value = "" + (start.getMonth()+1) + "/" + start.getDate() + "/" + start.getFullYear();
     reals[0].value = Math.floor(start.getTime()/1000);
     if(type=='range'){
       displays[1].value = "" + (end.getMonth()+1) + "/" + end.getDate() + "/" + end.getFullYear();
       reals[1].value = Math.floor(end.getTime()/1000);
     }
- 
+
     dpk.select('.nxj_month').each(function(monthDiv){
       currentDate.setDate(1);
       currentDate.setHours(0,0,0,0);
- 
+
       (monthDiv.select('.monthName'))[0].update(
         monthNames[currentDate.getMonth()] + ' ' + currentDate.getFullYear()
       );
- 
+
       var monthBody = (monthDiv.select('.nxj_monthBody'))[0]
         ,col
         ,row
@@ -348,7 +348,7 @@ nxj.ui.datePicker = (function() {
           monthBody.appendChild(newDay);
         }
       }
- 
+
       currentDate.setDate(1);
       currentDate.setMonth(currentDate.getMonth()+1);
     });
@@ -494,6 +494,252 @@ nxj.ui.slider = (function() {
   return self;
 }());
 
+nxj.ui.carousel = (function() {
+  var self = {};
+
+  self.init = function() {
+    return init();
+  }
+
+  self.activateCarousels = function(id) {
+    return activateCarousels(id);
+  }
+
+  self.carouselForward = function(id) {
+    return carouselForward(id);
+  }
+
+  self.carouselBackward = function(id) {
+    return carouselBackward(id);
+  }
+
+  var locks = [];
+  var timers = [];
+
+  function init() {
+    activateCarousels();
+  }
+
+  function activateCarousels(id) {
+    if(id){
+      activateOneCarousel($(id));
+    }else{
+      $$('div.nxj_carousel').each(activateOneCarousel);
+    }
+  }
+
+  function activateOneCarousel(car){
+    // Get carousel properties
+    car = $(car);
+    locks[car.id] = false;
+    timers[car.id] = null;
+    var inner = (car.select('.nxj_carouselInner'))[0];
+    var autoScroll = car.getAttribute('data-autoscroll');
+    var hoverPause = car.getAttribute('data-hoverpause');
+
+    // Attach hover-pause observer
+    if(autoScroll == 'yes' && hoverPause == 'yes'){
+      inner.observe('mouseenter', function(){
+        if(timers[car.id]) clearTimeout(timers[car.id]);
+      });
+      inner.observe('mouseleave', function(){
+        timers[car.id] = setTimeout(function(){
+          carouselForward(car);
+        }, delayDuration*1000);
+      });
+    }
+
+    // Initialize controls
+    var controls = car.select('.nxj_carouselControls');
+    if(controls.length){
+      controls = controls[0];
+      controls.select('.nxj_carouselControlsDot').each(function(oneDot){
+        oneDot.observe('click', function(){
+          carouselMove(car, parseInt(oneDot.getAttribute('data-index')));
+        });
+      });
+      controls.select('.nxj_carouselControlsLeft').each(function(oneArrow){
+        oneArrow.observe('click', function(){
+          carouselBackward(car);
+        });
+      });
+      controls.select('.nxj_carouselControlsRight').each(function(oneArrow){
+        oneArrow.observe('click', function(){
+          carouselForward(car);
+        });
+      });
+    }
+
+    // Start the carousel if autoscroll is enabled
+    if(autoScroll == 'yes'){
+      var delayDuration = parseFloat(car.getAttribute('data-delayduration'));
+      timers[car.id] = setTimeout(function(){
+        carouselForward(car);
+      }, delayDuration*1000);
+    }
+  }
+
+  function carouselForward(car){
+    car = $(car);
+    var currentIndex = parseInt(car.getAttribute('data-currentindex'));
+    var numPanels = parseInt(car.getAttribute('data-numpanels'));
+    return carouselMove(car, (currentIndex+1)%numPanels);
+  }
+
+  function carouselBackward(car) {
+    car = $(car);
+    var currentIndex = parseInt(car.getAttribute('data-currentindex'));
+    var numPanels = parseInt(car.getAttribute('data-numpanels'));
+    return carouselMove(car, (currentIndex+numPanels-1)%numPanels);
+  }
+
+  function carouselMove(car, index) {
+    // Return if carousel is locked, else lock it
+    car = $(car);
+    if(locks[car.id]) return;
+    locks[car.id] = true;
+    clearTimeout(timers[car.id]);
+
+    // Get animation parameters
+    var width = parseInt(car.getAttribute('data-width'));
+    var height = parseInt(car.getAttribute('data-height'));
+    var animationType = car.getAttribute('data-animationtype');
+    var animationDirs = car.getAttribute('data-animationdir').split(',');
+    var animationReverseDir = car.getAttribute('data-animationreversedir');
+    var animationDuration = parseFloat(car.getAttribute('data-animationduration'));
+    var animationIndex = parseInt(car.getAttribute('data-animationindex'))%animationDirs.length;
+    var transition = car.getAttribute('data-transition');
+    var currentIndex = parseInt(car.getAttribute('data-currentindex'));
+    var numPanels = parseInt(car.getAttribute('data-numpanels'));
+
+    // Find out whether we're going forward or backward
+    if(currentIndex == index) return locks[car.id]=false;
+    var reverse = (currentIndex>index ? !((index==0)&&(currentIndex+1==numPanels)) : ((index+1==numPanels)&&(currentIndex==0)));
+    if(reverse) animationIndex = (animationIndex+animationDirs.length-1)%animationDirs.length;
+    var animationDir = animationDirs[animationIndex];
+
+    // Get the entering and leaving panels
+    var oldPanel = $(car.id+'_panel_'+currentIndex);
+    var newPanel = $(car.id+'_panel_'+index);
+
+    // Apply the appropriate animation
+    oldPanel.setStyle({'zIndex':0});
+    newPanel.setStyle({'zIndex':1});
+    switch(animationType){
+    case 'appear':
+      newPanel.show();
+      oldPanel.hide();
+      locks[car.id]=false;
+      break;
+
+    case 'fade':
+      oldPanel.fade({
+        duration: animationDuration
+        ,transition: Effect.Transitions[transition]
+      });
+      newPanel.appear({
+        duration: animationDuration
+        ,transition: Effect.Transitions[transition]
+        ,afterFinish: function(){
+          locks[car.id]=false;
+        }
+      });
+      break;
+
+    case 'cover':
+      var newLeft = animationDir.indexOf('W')>-1 ? width*-1 : (animationDir.indexOf('E')>-1 ? width : 0);
+      var newTop = animationDir.indexOf('N')>-1 ? height*-1 : (animationDir.indexOf('S')>-1 ? height : 0);
+      if(reverse){
+        oldPanel.setStyle({'zindex':1});
+        newPanel.setStyle({'zindex':0, 'left':'0px', 'top':'0px', 'display':'block'});
+        new Effect.Morph(oldPanel, {
+          style: 'top:'+newTop+'px;left:'+newLeft+'px;'
+          ,duration: animationDuration
+          ,transition: Effect.Transitions[transition]
+          ,afterFinish: function(){
+            oldPanel.hide();
+            locks[car.id]=false;
+          }
+        });
+      }else{
+        newPanel.setStyle({'left':newLeft+'px', 'top':newTop+'px', 'display':'block'});
+        new Effect.Morph(newPanel, {
+          style: 'top:0px;left:0px;'
+          ,duration: animationDuration
+          ,transition: Effect.Transitions[transition]
+          ,afterFinish: function(){
+            oldPanel.hide();
+            locks[car.id]=false;
+          }
+        });
+      }
+      break;
+
+    case 'slide':
+    default:
+      var newLeft = animationDir.indexOf('W')>-1 ? width*-1 : (animationDir.indexOf('E')>-1 ? width : 0);
+      var newTop = animationDir.indexOf('N')>-1 ? height*-1 : (animationDir.indexOf('S')>-1 ? height : 0);
+      if(reverse){
+        newPanel.setStyle({'left':(newLeft*-1)+'px', 'top':(newTop*-1)+'px', 'display':'block'});
+        new Effect.Morph(oldPanel, {
+          style: 'top:'+newTop+'px;left:'+newLeft+'px;'
+          ,duration: animationDuration
+          ,transition: Effect.Transitions[transition]
+          ,afterFinish: function(){
+            oldPanel.hide();
+            locks[car.id]=false;
+          }
+        });
+        new Effect.Morph(newPanel, {
+          style: 'top:0px;left:0px;'
+          ,duration: animationDuration
+          ,transition: Effect.Transitions[transition]
+        });
+      }else{
+        newPanel.setStyle({'left':newLeft+'px', 'top':newTop+'px', 'display':'block'});
+        new Effect.Morph(oldPanel, {
+          style: 'top:'+(newTop*-1)+'px;left:'+(newLeft*-1)+'px;'
+          ,duration: animationDuration
+          ,transition: Effect.Transitions[transition]
+          ,afterFinish: function(){
+            oldPanel.hide();
+            locks[car.id]=false;
+          }
+        });
+        new Effect.Morph(newPanel, {
+          style: 'top:0px;left:0px;'
+          ,duration: animationDuration
+          ,transition: Effect.Transitions[transition]
+        });
+      }
+      break;
+    }
+    if(!reverse) animationIndex = (animationIndex+1)%animationDirs.length;
+    car.setAttribute('data-animationindex', animationIndex);
+    car.setAttribute('data-currentindex', index);
+
+    // If controls are shown, highlight the correct dot
+    var controls = car.select('.nxj_carouselControls');
+    if(controls.length){
+      controls = controls[0];
+      controls.select('.nxj_carouselControlsDot').each(function(oneDot){
+        if(oneDot.getAttribute('data-index') == currentIndex) oneDot.removeClassName('on');
+        if(oneDot.getAttribute('data-index') == index) oneDot.addClassName('on');
+      });
+    }
+
+    // Set a timeout for the next cycle
+    var autoScroll = car.getAttribute('data-autoscroll');
+    if(autoScroll == 'yes'){
+      var delayDuration = parseFloat(car.getAttribute('data-delayduration'));
+      timers[car.id] = setTimeout(function(){
+        carouselForward(car);
+      }, delayDuration*1000);
+    }
+  }
+
+  return self;
+}());
 
 
 Event.observe(window, 'load', function(){
@@ -503,4 +749,5 @@ Event.observe(window, 'load', function(){
   nxj.ui.selectBox.init();
   nxj.ui.datePicker.init();
   nxj.ui.slider.init();
+  nxj.ui.carousel.init();
 });
