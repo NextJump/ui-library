@@ -1,34 +1,42 @@
 /* UILibrary Styles - by Dev Poets Society */
 @font-face{
-	font-family:'OpenSans';
-	font-style:normal;
-	font-variant:normal;
-	font-weight:normal;
-	src:url('OpenSans/OpenSans-Regular-webfont.eot');
-	src:url('OpenSans/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-		url('OpenSans/OpenSans-Regular-webfont.woff') format('woff'),
-		url('OpenSans/OpenSans-Regular-webfont.ttf') format('truetype'),
-		url('OpenSans/OpenSans-Regular-webfont.svg#webfont') format('svg');
+    font-family:'OpenSans';
+    font-style:normal;
+    font-variant:normal;
+    font-weight:normal;
+    src:url('OpenSans/OpenSans-Regular-webfont.eot');
+    src:url('OpenSans/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('OpenSans/OpenSans-Regular-webfont.woff') format('woff'),
+        url('OpenSans/OpenSans-Regular-webfont.ttf') format('truetype'),
+        url('OpenSans/OpenSans-Regular-webfont.svg#webfont') format('svg');
 }
 @font-face{
-	font-family:'Roboto';
-	font-style:normal;
-	font-variant:normal;
-	font-weight:normal;
-	src:url('Roboto/Roboto-Regular-webfont.eot');
-	src:url('Roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-		url('Roboto/Roboto-Regular-webfont.woff') format('woff'),
-		url('Roboto/Roboto-Regular-webfont.ttf') format('truetype'),
-		url('Roboto/Roboto-Regular-webfont.svg#webfont') format('svg');
+    font-family:'Roboto';
+    font-style:normal;
+    font-variant:normal;
+    font-weight:normal;
+    src:url('Roboto/Roboto-Regular-webfont.eot');
+    src:url('Roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('Roboto/Roboto-Regular-webfont.woff') format('woff'),
+        url('Roboto/Roboto-Regular-webfont.ttf') format('truetype'),
+        url('Roboto/Roboto-Regular-webfont.svg#webfont') format('svg');
 }
 .clear {
-	clear:both;
+    clear:both;
 }
 .floatLeft {
-	float:left;
+    float:left;
 }
 .floatRight {
-	float:right;
+    float:right;
+}
+body.noUserSelect {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 .nxj_sectionHead {
@@ -95,7 +103,7 @@
     padding: 10px;
     color: white;
     width: 160px;
-    *width: 175px; /* IE7 and below */  
+    *width: 175px; /* IE7 and below */
     top: 35px;
     left: -98px;
     z-index: 100;
@@ -185,7 +193,7 @@
     position:absolute;
     right:10px;
     top:10px;
-    width:22px; 
+    width:22px;
 }
 .nxj_lightboxClose:hover {
     background-position:0 -22px;
@@ -576,8 +584,8 @@ a.nxj_button.nxj_cssButtondisabled:hover {
 
 /* Pagination styles */
 .nxj_uiPagination {
-	float:right;
-	padding:5px;
+    float:right;
+    padding:5px;
 }
 
 ul.nxj_uiPage {
@@ -616,7 +624,7 @@ ul.nxj_uiPage li.active{
 }
 
 ul.nxj_uiPage li.hidden {
-	display:none;
+    display:none;
 }
 
 ul.nxj_uiPage * {
@@ -633,10 +641,10 @@ ul.nxj_uiPage li.disabled {
 }
 
 ul.nxj_uiPage li a {
-	text-decoration: none;
+    text-decoration: none;
 }
 ul.nxj_uiPage li a:hover {
-	text-decoration: none;
+    text-decoration: none;
     color: #1D6ECE;
 }
 
@@ -699,6 +707,37 @@ ul.nxj_uiPage li a:hover {
 .nxj_tabBlock.hide {
     display: none;
 }
+
+
+/* Pretty Scroll-bar */
+.nxj_scrollable {
+    outline:1px solid #888888;
+    overflow:hidden;
+    position:relative;
+}
+.nxj_scrollableContent {
+    height:100%;
+    width:100%;
+}
+.nxj_scrollBarX {
+    background:#333333;
+    background:rgba(52, 52, 52, 0.7);
+    border-radius:4px;
+    bottom:0;
+    cursor:pointer;
+    left:0;
+    position:absolute;
+}
+.nxj_scrollBarY {
+    background:#333333;
+    background:rgba(52, 52, 52, 0.7);
+    border-radius:4px;
+    cursor:pointer;
+    position:absolute;
+    right:0;
+    top:0;
+}
+
 
 /* Tool tips */
 .nxj_tipUp,

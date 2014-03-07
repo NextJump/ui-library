@@ -357,6 +357,132 @@ nxj.ui.datePicker = (function() {
   return self;
 }());
 
+nxj.ui.scrollBar = (function() {
+  var self = {};
+
+  var outer = document.body.appendChild(document.createElement('div')).setStyle({width:'50px', height:'50px', overflow:'auto'});
+  var inner = outer.appendChild(document.createElement('div')).setStyle({width:'100px', height:'100px'});
+  var browserBarThickness = 50-outer.clientHeight;
+  $(outer).remove();
+
+  self.init = function() {
+    return init();
+  }
+
+  self.activateScrollBars = function(id) {
+    return activateScrollBars(id);
+  }
+
+  function init() {
+    activateScrollBars();
+  }
+
+  function activateScrollBars(id){
+    if(id){
+      activateOneScrollBar($(id));
+    }else{
+      $$('div.nxj_scrollable').each(activateOneScrollBar);
+    }
+  }
+
+  function activateOneScrollBar(scr){
+    var content = scr.select('.nxj_scrollableContent')[0];
+    var inner = scr.select('.nxj_scrollableInner')[0];
+    var barX = scr.select('.nxj_scrollBarX')[0];
+    var barY = scr.select('.nxj_scrollBarY')[0];
+    var overflowX = (scr.hasAttribute('data-overflowx') ? scr.getAttribute('data-overflowx') : 'auto');
+    var overflowY = (scr.hasAttribute('data-overflowy') ? scr.getAttribute('data-overflowy') : 'auto');
+    var contW = content.scrollWidth;
+    var contH = content.scrollHeight;
+    var scrW = scr.getWidth();
+    var scrH = scr.getHeight();
+    var offsetX = (content.scrollWidth==scrW&&content.scrollHeight==scrH ? 0 : contW-scrW);
+    var offsetY = (content.scrollWidth==scrW&&content.scrollHeight==scrH ? 0 : contH-scrH);
+    var barLengthX = Math.floor(scrW * scrW / contW);
+    var barLengthY = Math.floor(scrH * scrH / contH);
+    var callback = scr.hasAttribute('data-callback') ? window[scr.getAttribute('data-callback')] : null;
+    barX.setStyle({
+      width: barLengthX+'px'
+      ,height: scr.getAttribute('data-barthickness')+'px'
+      ,display: (offsetX>0&&overflowX!='hidden' ? 'block' : 'none')
+    });
+    barY.setStyle({
+      height: barLengthY+'px'
+      ,width: scr.getAttribute('data-barthickness')+'px'
+      ,display: (offsetY>0&&overflowY!='hidden' ? 'block' : 'none')
+    });
+    content.setStyle({
+      paddingBottom: (offsetX>0 ? browserBarThickness+'px' : '0')
+      ,paddingRight: (offsetY>0 ? browserBarThickness+'px' : '0')
+    });
+    content.setStyle({
+      width: scrW+'px'
+      ,height: scrH+'px'
+    });
+    inner.setStyle({
+      width: scrW+'px'
+      ,height: scrH+'px'
+    });
+    var scaleX = (scrW-barLengthX)/(content.scrollWidth-scrW);
+    var scaleY = (scrH-barLengthY)/(content.scrollHeight-scrH);
+
+    var dragStartX = function(e){
+      $(window.document.body).addClassName('noUserSelect');
+      $(window.document.body).onselectstart = function(){ return false; };
+      barX.addClassName('dragging');
+      barX.setAttribute('data-start-x', e.clientX);
+      barX.setAttribute('data-start-left', parseFloat(barX.getStyle('left')));
+    };
+    var dragStartY = function(e){
+      $(window.document.body).addClassName('noUserSelect');
+      $(window.document.body).onselectstart = function(){ return false; };
+      barY.addClassName('dragging');
+      barY.setAttribute('data-start-y', e.clientY);
+      barY.setAttribute('data-start-top', parseFloat(barY.getStyle('top')));
+    };
+    var dragEnd = function(e){
+      $(window.document.body).removeClassName('noUserSelect');
+      $(window.document.body).onselectstart = null;
+      barX.removeClassName('dragging');
+      barY.removeClassName('dragging');
+      if(callback){
+        callback(content.scrollLeft, content.scrollTop, true);
+      }
+    };
+    var dragMove = function(e){
+      scr.select('.dragging').each(function(bar){
+        if(bar.hasClassName('nxj_scrollBarX')){
+          var startX = parseFloat(bar.getAttribute('data-start-x'));
+          var startLeft = parseFloat(bar.getAttribute('data-start-left'));
+          var move = e.clientX-startX;
+          barX.setStyle({left: (Math.max(0, Math.min(scrW-barLengthX, parseFloat(barX.getAttribute('data-start-left'))+move)))+'px'});
+          content.scrollLeft = parseFloat(barX.getStyle('left'))/scaleX;
+        }else{
+          var startY = parseFloat(bar.getAttribute('data-start-y'));
+          var startTop = parseFloat(bar.getAttribute('data-start-top'));
+          var move = e.clientY-startY;
+          barY.setStyle({top: (Math.max(0, Math.min(scrH-barLengthY, parseFloat(barY.getAttribute('data-start-top'))+move)))+'px'});
+          content.scrollTop = parseFloat(barY.getStyle('top'))/scaleY;
+        }
+        if(callback){
+          callback(content.scrollLeft, content.scrollTop, false);
+        }
+      });
+    }
+
+    content.observe('scroll', function(e){
+      barX.setStyle({left: (content.scrollLeft * scaleX)+'px'});
+      barY.setStyle({top: (content.scrollTop * scaleY)+'px'});
+    });
+    barX.observe('mousedown', dragStartX);
+    barY.observe('mousedown', dragStartY);
+    $(document).observe('mouseup', dragEnd);
+    $(document).observe('mousemove', dragMove);
+  }
+
+  return self;
+}());
+
 nxj.ui.slider = (function() {
   var self = {};
 
@@ -399,6 +525,8 @@ nxj.ui.slider = (function() {
     var callback = sld.hasAttribute('data-callback') ? window[sld.getAttribute('data-callback')] : null;
 
     var dragStart = function(handle, evt){
+      $(window.document.body).addClassName('noUserSelect');
+      $(window.document.body).onselectstart = function(){ return false; };
       handle.addClassName('dragging');
       handle.setAttribute('data-start-x', evt.clientX);
       handle.setAttribute('data-start-left', parseFloat(handle.getStyle('left')));
@@ -410,6 +538,8 @@ nxj.ui.slider = (function() {
       }
     };
     var dragEnd = function(handle){
+      $(window.document.body).removeClassName('noUserSelect');
+      $(window.document.body).onselectstart = null;
       handle.removeClassName('dragging');
       if(callback){
         if(type=='range'){
@@ -748,6 +878,7 @@ Event.observe(window, 'load', function(){
   nxj.ui.tabs.init();
   nxj.ui.selectBox.init();
   nxj.ui.datePicker.init();
+  nxj.ui.scrollBar.init();
   nxj.ui.slider.init();
   nxj.ui.carousel.init();
 });

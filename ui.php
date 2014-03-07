@@ -424,7 +424,7 @@ class Nxj_UI {
 
         if($marker){
             $index = 0;
-			$markerJump = max($increment, 5/$scale);
+            $markerJump = max($increment, 5/$scale);
             for($i=$min; $i<=$max; $i=min($i+$markerJump, $max)){
                 if($mode=='discrete' || $i==$min || $i==$max){
                     $output .= "
@@ -443,130 +443,23 @@ class Nxj_UI {
     }
 
     public static function scrollbar($params) {
-echo "Pretty scrollbars are not fully implemented :(";
-/* TODO
-<style type="text/css">
-#<?php= $params['id']?> {
-    position: relative;
-    height: <?php= $params['height']?>;
-    overflow: hidden;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-#<?php= $params['id']?> .<?php= $params['innerClass']?> {
-    width: 96%;
-}
-#scrollBar {
-    height: 100%;
-    width: 0;
-    border: 5px solid #EEE;
-    border-width: 0 5px;
-    border-radius: 5px;
-    position: absolute;
-    right: 2px;
-    top: 0;
-    zoom: 1;
-    z-index: 5;
-}
-#scrollBar .scrollHandle {
-    position: absolute;
-    top: 0;
-    right: -5px;
-    height: 30%;
-    width: 0;
-    border: 5px solid #555;
-    border-width: 0 5px;
-    border-radius: 5px;
-    zoom: 1;
-}
-</style>
-
-<div id="scrollBar" class="scrollBar" style="<?php= Util::select($this, 'visible', true) ? '' : 'display:none'?>" data-callback="<?php= $params['callback']?>">
-    <div class="scrollHandle" style="top:0"></div>
-</div>
-
-<script style="text/javascript">
-var nxj = window.nxj || {};
-var inner = <?php= json_encode($params['innerClass'])?>;
-nxj.scrollBar =  {
-    bar: '',
-    outer: '',
-
-    init: function(outer) {
-        var height = Math.round(Math.min(outer.getHeight()/outer.down('.'+inner).getHeight(), 1)*100);
-        this.bar = outer.down('.scrollBar');
-        this.outer = outer;
-        this.callback(height);
-
-        this.bar.down('.scrollHandle').setStyle({'top' : '0px'});
-
-        this.scroll();
-    },
-
-    update: function(outer) {
-        var height = Math.round(Math.min(outer.getHeight()/outer.down('.'+inner).getHeight(), 1)*100);
-        this.bar = outer.down('.scrollBar');
-        this.outer = outer;
-        this.callback(height);
-        this.scroll();
-    },
-
-    callback: function(height) {
-        this.bar.down('.scrollHandle').setStyle({'height': height+'%'});
-        var self = this,
-            handle = this.bar.down('.scrollHandle'),
-            maxOffset = this.outer.getHeight() - handle.getHeight();
-
-        var evt = (/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel";
-        this.bar.next('.'+inner).stopObserving();
-        this.bar.next('.'+inner).observe(evt, scrollListener);
-
-        this.drag(handle, maxOffset);
-
-        function scrollListener(event) {
-            event.preventDefault(event);
-
-            var sign = Object.isUndefined(event.wheelDelta) ? event.detail/Math.abs(event.detail) : -(event.wheelDelta/Math.abs(event.wheelDelta)),
-                top = parseFloat(handle.getStyle('top'))+20*sign,
-                top = top < maxOffset ? (top > 0 ? top : 0) : maxOffset;
-
-            handle.setStyle({'top': top+'px'});
-            self.scroll();
-
-            var ufunc = $('scrollBar').getAttribute('data-callback');
-            if(typeof window[ufunc] == 'function') {
-                window[ufunc].call();
-            }
-        }
-    },
-
-    scroll: function() {
-        var top = Math.ceil(parseInt(this.bar.down().getStyle('top'))/this.bar.getHeight()*(this.outer.down('.'+inner).getHeight()+80));
-        this.outer.down('.'+inner).setStyle({'top': '-'+top+'px', 'position': 'relative'});
-    },
-
-    drag: function(handle, maxOffset) {
-        var self = this;
-        var dragger = new Draggable(handle, {
-            constraint: 'vertical',
-            scroll: this.bar,
-            snap: function(x, y, obj) {
-                return [ x, maxOffset >= y ? (y > 0 ? y :0) : maxOffset];
-            },
-            onDrag: function() {
-                self.scroll();
-                self.drag(handle, maxOffset);
-
-                var ufunc = $('scrollBar').getAttribute('data-callback');
-                if(typeof window[ufunc] == 'function') {
-                    window[ufunc].call();
-                }
-            }
-        });
-    }
-};
-</script>
-*/
+        $overflowX = ($params['overflowX'] ? strtolower($params['overflowX']) : 'auto');
+        $overflowY = ($params['overflowY'] ? strtolower($params['overflowY']) : 'auto');
+        $barThickness = (isset($params['barThickness']) ? (int)$params['barThickness'] : 15);
+        $width = (isset($params['width']) ? (is_int($params['width']) ? $params['width'].'px' : $params['width']) : '100%');
+        $height = (isset($params['height']) ? (is_int($params['height']) ? $params['height'].'px' : $params['height']) : 'auto');
+        $callback = (isset($params['callback']) ? ' data-callback="'.$params['callback'].'"' : '');
+        $output = "
+<div class=\"nxj_scrollable\" style=\"width:$width;height:$height;\" data-overflowx=\"$overflowX\" data-overflowy=\"$overflowY\" data-barthickness=\"$barThickness\"$callback>
+    <div class=\"nxj_scrollableContent\" style=\"overflow-x:$overflowX;overflow-y:$overflowY;\">
+        <div class=\"nxj_scrollableInner\">".
+            $params['content'].
+        "</div>
+    </div>
+    <div class=\"nxj_scrollBarX\"></div>
+    <div class=\"nxj_scrollBarY\"></div>
+</div>";
+        return $output;
     }
 
     public static function pagination($params) {
